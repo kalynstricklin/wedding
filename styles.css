@@ -11,8 +11,10 @@ body {
 }
 
 header img {
-    max-width: 500px;
+    width: 100%;
     margin-bottom: 1.5rem;
+    align-items: center;
+    vertical-align: middle;
 }
 
 /* Headline */
@@ -25,16 +27,21 @@ header img {
 
 /* Date and Countdown */
 .wedding-date {
+    margin: 8px 0;
     font-family: 'Gentium Book Basic Italic';
+    letter-spacing: 3px;
+    font-weight: normal;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin: 0.5rem 0;
+    line-height: 22px;
 }
 
 .countdown {
+    margin: 8px 0;
     font-family: 'Gentium Book Basic Italic';
-    letter-spacing: 1.5px;
-    margin-bottom: 2rem;
+    letter-spacing: 3px;
+    font-weight: normal;
+    text-transform: uppercase;
+    line-height: 22px;
 }
 
 /* Navigation */
@@ -61,16 +68,25 @@ header img {
 /* Wedding Day Section */
 .wedding-day .script {
     font-family: 'Mrs Saint Delafield', cursive;
-    /*font-family: 'Dancing Script', cursive;*/
-    font-size: 2.25rem;
-    margin-top: 3rem;
-    margin-bottom: 0.5rem;
+    font-size: 50px;
+    font-weight: 500;
+    text-transform: lowercase;
+    line-height: 1;
+    margin: 32px 0px 8px;
 }
 
 .footer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
     position: absolute;
     bottom: 0;
     left: 0;
+    margin-top: auto;
     width: 100%;
-    text-align: center;
+}
+
+.hr {
+    width: 50%;
 }

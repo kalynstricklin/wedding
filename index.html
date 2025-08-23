@@ -20,7 +20,7 @@
 <main>
     <h1><span class="names">Kalyn & Jack</span></h1>
     <p class="wedding-date">June 20, 2026</p>
-    <p class="countdown">301 Days To Go!</p>
+    <p class="countdown"><span id="days">days</span> Days To Go!</p>
 
     <nav>
         <ul class="nav">
@@ -36,7 +36,7 @@
     </section>
 </main>
 
-<footer>
+<footer class="footer">
     <div>
         <h1><span>K & J</span></h1>
         <hr>
@@ -46,3 +46,14 @@
 
 </body>
 </html>
+
+<script>
+    const wedding_date = new Date('June 20, 2026 00:00:00').getTime();
+
+    const countDownInterval = setInterval(function () {
+        const now = new Date().getTime();
+        const distance = wedding_date - now;
+        document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+    }, 1000)
+
+</script>
