@@ -9,51 +9,95 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Gentium+Book+Basic+Italic:wght@400&family=Gentium+Book+Basic:wght@400&family=Mrs+Saint+Delafield:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Roboto+Mono&family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
+
 <body>
 
-<header>
-    <img src="header.webp"/>
-</header>
+    <header>
+        <nav class="nav-custom navbar navbar-expand-lg sticky-top navbar-light bg-white">
+            <div class="d-flex align-items-center w-100 justify-content-between">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarcustom" aria-controls="navbarcustom" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <p class="page-title ">K&J</p>
+            </div>
 
-<main>
-    <h1><span class="names">Kalyn & Jack</span></h1>
-    <p class="wedding-date">June 20, 2026</p>
-    <p class="countdown"><span id="days">days</span> Days To Go!</p>
+            <div class="collapse navbar-collapse" id="navbarcustom">
+                <ul class="navbar-nav custom-header-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="photos.html">Photos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registry.html">Registry</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="rsvp.html">RSVP</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-    <nav>
-        <ul class="nav">
-            <li class="active">Home</li>
-            <li>Photos</li>
-            <li>Registry</li>
-        </ul>
-    </nav>
+        <img src="header.webp" class="img-fluid w-100"/>
+    </header>
 
-    <section class="wedding-day">
-        <p class="script">wedding day</p>
+    <main>
+        <h1><span class="names">Kalyn & Jack</span></h1>
         <p class="wedding-date">June 20, 2026</p>
-    </section>
-</main>
+        <p class="countdown"><span id="days">0</span> Days To Go!</p>
 
-<footer class="footer">
-    <div>
-        <h1><span>K & J</span></h1>
-        <hr>
-        <p>6.20.2026</p>
-    </div>
-</footer>
+        <nav>
+            <ul class="nav-custom">
+                <li class="active"><a href="index.html" onclick="setActive(this)">Home</a></li>
+                <li><a href="photos.html" onclick="setActive(this)">Photos</a></li>
+                <li><a href="registry.html" onclick="setActive(this)">Registry</a></li>
+                <li><a href="rsvp.html" onclick="setActive(this)">RSVP</a></li>
+            </ul>
+        </nav>
+
+        <section class="wedding-day">
+            <p class="script">wedding day</p>
+            <p class="wedding-date">June 20, 2026</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div>
+            <h1><span>K & J</span></h1>
+            <hr />
+            <p>6.20.2026</p>
+        </div>
+    </footer>
+
+
+    <script>
+
+        const wedding_date = new Date('June 20, 2026 00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = wedding_date - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById('days').innerText = days > 0 ? days : 0;
+        }
+
+        function setActive(element){
+            const navItems = document.querySelectorAll('.nav li');
+            navItems.forEach(item => item.classList.remove('active'));
+            element.parentElement.classList.add('active');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+
+    </script>
 
 </body>
 </html>
-
-<script>
-    const wedding_date = new Date('June 20, 2026 00:00:00').getTime();
-
-    const countDownInterval = setInterval(function () {
-        const now = new Date().getTime();
-        const distance = wedding_date - now;
-        document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-    }, 1000)
-
-</script>
