@@ -24,10 +24,11 @@ header {
     align-items: center;
     vertical-align: middle;
 }
-img {
-    object-fit: cover;
-    max-height: 400px;
-}
+
+/*img {*/
+/*    object-fit: cover;*/
+/*    max-height: 750px;*/
+/*}*/
 
 .navbar-dark .navbar-toggler-icon {
     background-image: none;
