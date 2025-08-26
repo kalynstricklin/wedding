@@ -18,6 +18,15 @@ html {
     scroll-behavior: smooth;
 }
 
+@media (min-width: 576px) {
+    .navbar {
+        display: none !important;
+    }
+}
+.navbar-toggler{
+    border: none !important;
+}
+
 header {
     width: 100%;
     margin-bottom: 1.5rem;
@@ -25,21 +34,6 @@ header {
     vertical-align: middle;
 }
 
-/*img {*/
-/*    object-fit: cover;*/
-/*    max-height: 750px;*/
-/*}*/
-
-.navbar-dark .navbar-toggler-icon {
-    background-image: none;
-}
-
-.navbar-dark .navbar-toggler-icon::after {
-    content: "\f0c9";
-    font-family: "FontAwesome";
-    font-size: 22px;
-    color: #3659a4;
-}
 .names {
     color: #3659a4;
     font-size: 3.5rem;
@@ -50,7 +44,7 @@ header {
     justify-content: center;
 }
 
-.wedding-date, .countdown{
+.wedding-details, .countdown{
     color: #3659a4;
     margin: 8px 0;
     font-family: 'Gentium Book Basic', serif;
@@ -62,10 +56,12 @@ header {
     display: flex;
     justify-content: center;
 }
-
-.custom-header-nav li a{
-    color: #3659a4;
+.navbar-nav.custom-header-nav .nav-item .nav-link {
+    color: #3659a4 !important;
 }
+
+
+
 .nav-custom {
     color: #3659a4;
     list-style: none;
@@ -92,20 +88,21 @@ header {
 }
 
 .nav-custom li.active {
-    border-bottom: 2px solid #3c5597;
+    border-bottom: 2px solid #3659a4;
 }
 
 .page-title {
-    font-family: 'Mrs Saint Delafield', cursive;
+    font-family: 'Gentium Book Basic', serif;
+    /*font-family: 'Mrs Saint Delafield', cursive;*/
     font-width: 500;
     color: #3659a4;
-    letter-spacing: 5px;
-    text-transform: lowercase;
+    /*letter-spacing: 2px;*/
+    /*text-transform: lowercase;*/
     width: 100%;
     align-items: center;
     display: flex;
     justify-content: center;
-    font-size: 50px;
+    font-size: 35px;
     text-decoration: none;
     margin-right: 2rem;
 }
@@ -132,9 +129,22 @@ header {
     justify-content: center;
 }
 
+.details {
+    font-family: 'Gentium Book Basic', serif;
+    color: #3659a4;
+    line-height: 22px;
+}
+
+.details-lg {
+    font-size: 25px;
+}
+
+.details-sm {
+    font-size: 18px;
+}
 hr {
     width: 100%;
-    background-color: #3c5597;
+    background-color: #3659a4;
     height: 1.5px;
     border: none;
     margin: 20px auto;

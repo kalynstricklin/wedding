@@ -8,10 +8,16 @@ function updateCountdown() {
     document.getElementById('days').innerText = days > 0 ? days : 0;
 }
 
-function setActive(element){
-    const navItems = document.querySelectorAll('.nav li');
-    navItems.forEach(item => item.classList.remove('active'));
-    element.parentElement.classList.add('active');
+function setActive(){
+    const navItems = document.querySelectorAll('.nav-item li');
+    navItems.forEach(item => item.addEventListener('click', function(){
+        const isActive = document.querySelector('.nav-item li.active');
+        if(isActive) isActive.classList.remove('active');
+
+        this.parentElement.classList.add('active');
+    }))
+    // navItems.forEach(item => item.classList.remove('active'));
+    // element.parentElement.classList.add('active');
 }
 
 updateCountdown();
