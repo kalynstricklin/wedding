@@ -133,9 +133,7 @@ header {
     font-family: 'Gentium Book Basic', serif;
     color: #3659a4;
     line-height: 22px;
-    align-self: center;
-    justify-content: center;
-    display: flex;
+    text-align: center;
 }
 
 .details-lg {
