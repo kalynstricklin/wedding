@@ -129,11 +129,18 @@ header {
     justify-content: center;
 }
 
+.registry-section {
+    text-align: center;
+    width: 100%;
+}
+
 .registry-section .details {
     font-family: 'Gentium Book Basic', serif;
     color: #3659a4;
     line-height: 22px;
     text-align: center;
+    display: block;
+    width: 100%;
 }
 
 .details-lg {
