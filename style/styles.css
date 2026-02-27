@@ -392,6 +392,7 @@ html, body {
     object-fit: cover;
     display: block;
     transition: transform 0.3s ease;
+    border: 5px solid #2a4680;
 }
 
 .photo-item img:hover {
@@ -409,3 +410,6 @@ html, body {
         height: 250px;
     }
 }
+
+
+

@@ -22,5 +22,3 @@ function setActive() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 setActive();
-
-
