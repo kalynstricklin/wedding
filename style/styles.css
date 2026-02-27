@@ -19,9 +19,32 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Desktop: Show navbar as horizontal links */
 @media (min-width: 576px) {
-    .navbar {
-        display: none !important;
+    header .nav-custom.navbar {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    header .nav-custom.navbar .navbar-toggler {
+        display: none;
+    }
+
+    header .nav-custom.navbar .navbar-collapse {
+        display: flex !important;
+        justify-content: center;
+    }
+
+    header .nav-custom.navbar .navbar-nav {
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    header .nav-custom.navbar .page-title {
+        display: none;
     }
 }
 .navbar-toggler{
@@ -67,6 +90,7 @@ header {
 }
 .navbar-nav.custom-header-nav .nav-item .nav-link {
     color: #3659a4 !important;
+    text-decoration: none !important;
 }
 
 
@@ -80,6 +104,7 @@ header {
     padding: 0;
     font-family: 'Gentium Book Basic', serif;
     font-style: italic;
+    text-decoration: none;
 }
 
 .nav-custom li a{
@@ -101,7 +126,7 @@ header {
 .page-title {
     font-family: 'Gentium Book Basic', serif;
     /*font-family: 'Mrs Saint Delafield', cursive;*/
-    font-width: 500;
+    font-weight: 500;
     color: #3659a4;
     /*letter-spacing: 2px;*/
     /*text-transform: lowercase;*/
@@ -270,11 +295,6 @@ hr {
     .navbar {
         display: flex !important;
     }
-
-    /* Hide desktop navigation on mobile */
-    main .nav-custom {
-        display: none;
-    }
 }
 
 /* Tablet styles (576px - 768px) */
@@ -292,14 +312,10 @@ hr {
     }
 }
 
-/* Desktop styles - hide mobile navbar */
+/* Desktop styles - show navbar as horizontal links */
 @media (min-width: 576px) {
-    .navbar {
-        display: none !important;
-    }
-
-    main .nav-custom {
-        display: flex;
+    header .navbar {
+        justify-content: center;
     }
 }
 
