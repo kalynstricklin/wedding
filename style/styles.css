@@ -1,14 +1,14 @@
 body {
     font-family: 'Playfair Display', serif;
-    color: #3659a4;
-    background-color: #f8f6f1;
+    color: #758fb2;
+    background-color: #f7f5f0;
     text-align: center;
     padding: 2rem;
     margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: linear-gradient(61deg, rgb(250, 250, 241), rgba(0,0,0,0));
+    background: linear-gradient(135deg, #f7f5f0 0%, #faf8f3 50%, #f5f3ee 100%);
 }
 
 main.content {
@@ -56,7 +56,9 @@ html {
 }
 
 .navbar.bg-white {
-    background-color: rgba(255,253,248,0.8) !important;
+    /*background-color: rgba(255,253,248,0.8) !important;*/
+    background: linear-gradient(135deg, #f7f5f0 0%, #faf8f3 50%, #f5f3ee 100%);
+
 }
 
 header {
@@ -67,20 +69,20 @@ header {
 }
 
 .names {
-    color: #3659a4;
-    font-size: 3.5rem;
-    font-style: italic;
-    font-family: 'Gentium Book Basic', serif;
+    color: #5a7a56;
+    font-size: 3.25rem;
+    font-family: "Beth Ellen", cursive;
     font-weight: normal;
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .wedding-details, .countdown{
-    color: #3659a4;
+    color: #758fb2;
     margin: 8px 0;
     font-family: 'Gentium Book Basic', serif;
-    font-style: italic;
+    /*font-style: italic;*/
     letter-spacing: 3px;
     font-weight: normal;
     text-transform: uppercase;
@@ -89,45 +91,45 @@ header {
     justify-content: center;
 }
 .navbar-nav.custom-header-nav .nav-item .nav-link {
-    color: #3659a4 !important;
+    color: #758fb2 !important;
     text-decoration: none !important;
 }
 
 
 
 .nav-custom {
-    color: #3659a4;
+    color: #758fb2;
     list-style: none;
     display: flex;
     justify-content: center;
     gap: 2rem;
     padding: 0;
     font-family: 'Gentium Book Basic', serif;
-    font-style: italic;
+    /*font-style: italic;*/
     text-decoration: none;
 }
 
 .nav-custom li a{
     list-style: none;
     font-family: 'Gentium Book Basic', serif;
-    font-style: italic;
+    /*font-style: italic;*/
     color: inherit;
     text-decoration: none;
     cursor: pointer;
     padding-bottom: 4px;
     position: relative;
-    color: #3659a4;
+    color: #758fb2;
 }
 
 .nav-custom li.active {
-    border-bottom: 2px solid #3659a4;
+    border-bottom: 2px solid #758fb2;
 }
 
 .page-title {
     font-family: 'Gentium Book Basic', serif;
     /*font-family: 'Mrs Saint Delafield', cursive;*/
     font-weight: 500;
-    color: #3659a4;
+    color: #758fb2;
     /*letter-spacing: 2px;*/
     /*text-transform: lowercase;*/
     position: absolute;
@@ -139,23 +141,42 @@ header {
 }
 
 .wedding-day .script {
-    font-family: 'Mrs Saint Delafield', cursive;
-    font-size: 50px;
+    font-family: 'Beth Ellen', cursive;
+    /*font-family: 'Mrs Saint Delafield', cursive;*/
+    font-size: 30px;
     font-weight: 500;
     text-transform: lowercase;
     line-height: 1;
-    margin: 32px 0px 8px;
-    color: #3659a4;
+    margin: 16px 0px 8px;
+    color: #5a7a56;
     display: flex;
     justify-content: center;
 }
 
+.wedding-day {
+    margin-top: 5rem;
+}
+.wedding-img {
+    display: block;
+    margin: 2rem auto;
+    max-width: 300px;
+    width: 100%;
+}
+
+.wedding-img img {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 4px solid #5a7a56;
+}
 .footer {
     font-family: 'Gentium Book Basic', serif;
     position: relative;
     bottom: 0;
     margin-top: auto;
-    color: #3659a4;
+    color: #758fb2;
     display: flex;
     justify-content: center;
 }
@@ -167,7 +188,7 @@ header {
 
 .registry-section .details {
     font-family: 'Gentium Book Basic', serif;
-    color: #3659a4;
+    color: #758fb2;
     line-height: 22px;
     text-align: center;
     display: block;
@@ -178,13 +199,18 @@ header {
     font-size: 25px;
 }
 
+.details{
+    font-family: 'Gentium Book Basic', serif;
+    color: #758fb2;
+}
 .details-sm {
     font-size: 18px;
 }
 hr {
     width: 100%;
-    background-color: #3659a4;
-    height: 1.5px;
+    max-width: 200px;
+    background-color: #c5d4c0;
+    height: 1px;
     border: none;
     margin: 20px auto;
 }
@@ -212,9 +238,9 @@ hr {
     padding: 12px 16px;
     font-size: 16px; /* Prevents iOS zoom on focus */
     font-family: 'Gentium Book Basic', serif;
-    border: 1px solid #3659a4;
+    border: 1px solid #758fb2;
     border-radius: 4px;
-    color: #3659a4;
+    color: #758fb2;
     background-color: #fff;
     box-sizing: border-box;
 }
@@ -222,12 +248,12 @@ hr {
 .rsvp-form input:focus,
 .rsvp-form select:focus {
     outline: none;
-    border-color: #3659a4;
+    border-color: #758fb2;
     box-shadow: 0 0 0 2px rgba(54, 89, 164, 0.2);
 }
 
 .submit-btn {
-    background-color: #3659a4;
+    background-color: #758fb2;
     color: #fff;
     border: none;
     padding: 14px 32px;
@@ -243,17 +269,17 @@ hr {
 }
 
 .submit-btn:hover {
-    background-color: #2a4680;
+    background-color: #5a6d7a;
 }
 
 /* Mobile styles (max-width: 575px) */
 @media (max-width: 575px) {
     body {
-        padding: 1rem;
+        padding: 0.75rem;
     }
 
     .names {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     .page-title {
@@ -262,7 +288,11 @@ hr {
     }
 
     .wedding-day .script {
-        font-size: 36px;
+        font-size: 22px;
+    }
+
+    .wedding-day {
+        margin-top: 3rem;
     }
 
     .nav-custom {
@@ -288,7 +318,7 @@ hr {
     }
 
     .footer h1 {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
     }
 
     /* Show mobile navbar on small screens */
@@ -304,7 +334,7 @@ hr {
     }
 
     .wedding-day .script {
-        font-size: 42px;
+        font-size: 30px;
     }
 
     .nav-custom {
@@ -347,11 +377,16 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    align-items: center;
 }
-
+.rsvp-link {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
 .registry-btn {
     display: inline-block;
-    background-color: #3659a4;
+    background-color: #758fb2;
     color: #fff;
     text-decoration: none;
     padding: 14px 32px;
@@ -365,7 +400,7 @@ html, body {
 }
 
 .registry-btn:hover {
-    background-color: #2a4680;
+    background-color: #5a6d7a;
     color: #fff;
     text-decoration: none;
 }
@@ -383,7 +418,7 @@ html, body {
 .photo-item {
     overflow: hidden;
     border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(54, 89, 164, 0.15);
+    box-shadow: 0 2px 12px rgba(90, 122, 86, 0.12);
 }
 
 .photo-item img {
@@ -392,7 +427,7 @@ html, body {
     object-fit: cover;
     display: block;
     transition: transform 0.3s ease;
-    border: 5px solid #2a4680;
+    border: 4px solid #5a7a56;
 }
 
 .photo-item img:hover {
@@ -411,5 +446,8 @@ html, body {
     }
 }
 
-
-
+.footer-initials {
+    text-align: center;
+    display: block;
+    width: 100%;
+}
