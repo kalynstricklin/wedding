@@ -216,27 +216,30 @@ hr {
 }
 
 /* Form styles */
-.rsvp-form {
+.rsvp-form .invitation-form {
     max-width: 500px;
     margin: 0 auto;
     padding: 1rem;
 }
 
-.rsvp-form .form-group {
+.rsvp-form .invitation-form .form-group  .invitation-group{
     margin-bottom: 1.5rem;
     text-align: left;
 }
 
-.rsvp-form label {
+.rsvp-form label,
+.invitation-form label{
     display: block;
     margin-bottom: 0.5rem;
 }
 
 .rsvp-form input,
-.rsvp-form select {
+.rsvp-form select,
+.invitation-form input,
+.invitation-form select {
     width: 100%;
     padding: 12px 16px;
-    font-size: 16px; /* Prevents iOS zoom on focus */
+    font-size: 16px;
     font-family: 'Gentium Book Basic', serif;
     border: 1px solid #758fb2;
     border-radius: 4px;
@@ -246,13 +249,15 @@ hr {
 }
 
 .rsvp-form input:focus,
-.rsvp-form select:focus {
+.rsvp-form select:focus,
+.invitation-form input:focus,
+.invitation-form select:focus {
     outline: none;
     border-color: #758fb2;
     box-shadow: 0 0 0 2px rgba(54, 89, 164, 0.2);
 }
 
-.submit-btn {
+.submit-btn, .invite-btn {
     background-color: #758fb2;
     color: #fff;
     border: none;
@@ -268,7 +273,7 @@ hr {
     transition: background-color 0.2s ease;
 }
 
-.submit-btn:hover {
+.submit-btn:hover, .invite-btn:hover {
     background-color: #5a6d7a;
 }
 

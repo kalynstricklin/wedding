@@ -52,24 +52,31 @@
 
 
     <section class="rsvp-section">
-<!--        <p class="details">March 16, 2026 - San Francisco, California</p>-->
-
-        <section class="wedding-day">
-            <p class="script">reception details</p>
-            <p class="wedding-details">April 25, 2026, 4 - 7 PM</p>
-            <div class="wedding-details">Huntsville Botanical Gardens</div>
-            <div class="wedding-details">Huntsville, AL</div>
-        </section>
-
-        <form id="rsvp-form" class="rsvp-form">
-            <div class="form-group">
+        <!-- Step 1: Find Invitation -->
+        <section class="invitation-form" id="lookup-section">
+            <div class="invitation-group">
                 <label for="first_name" class="details">First Name</label>
                 <input type="text" id="first_name" name="first_name" required>
             </div>
-            <div class="form-group">
+
+            <div class="invitation-group">
                 <label for="last_name" class="details">Last Name</label>
                 <input type="text" id="last_name" name="last_name" required>
             </div>
+
+            <p class="details" style="margin: 1.5rem 0;">Due to limited space, attendance is reserved for those on our guest list. Please enter your name to find your invitation.</p>
+            <div class="rsvp-link">
+                <button class="invite-btn" id="invite">
+                    Find your invitation
+                </button>
+            </div>
+            <p id="lookup-message" class="details" style="margin-top: 1rem;"></p>
+        </section>
+
+        <!-- Step 2: RSVP Form (hidden initially) -->
+        <form id="rsvp-form" class="rsvp-form" style="display: none;">
+            <p class="details" id="guest-greeting" style="margin-bottom: 1.5rem;"></p>
+
             <div class="form-group">
                 <label for="email" class="details">Email</label>
                 <input type="email" id="email" name="email" required>
@@ -87,12 +94,80 @@
                 </select>
             </div>
 
-            <button type="submit" class="submit-btn">Submit</button>
+            <div class="rsvp-link">
+                <button type="submit" class="submit-btn">Submit RSVP</button>
+            </div>
             <p id="form-message" class="details" style="margin-top: 1rem;"></p>
         </form>
 
         <script>
-            const API_URL = 'http://kalynandjack.love';
+            const API_URL = 'http://api.kalynandjack.love';
+            let guestData = null;
+
+            document.getElementById('invite').addEventListener('click', async (e) => {
+                const findInviteBtn = document.getElementById('invite');
+                const lookupMessage = document.getElementById('lookup-message');
+                const firstName = document.getElementById('first_name').value.trim();
+                const lastName = document.getElementById('last_name').value.trim();
+
+                if (!firstName || !lastName) {
+                    lookupMessage.textContent = 'Please enter both first and last name.';
+                    lookupMessage.style.color = '#c0392b';
+                    return;
+                }
+
+                try {
+                    findInviteBtn.disabled = true;
+                    findInviteBtn.textContent = 'Finding Invitation...';
+                    lookupMessage.textContent = '';
+
+                    const params = new URLSearchParams({
+                        first_name: firstName,
+                        last_name: lastName
+                    });
+
+                    const response = await fetch(`${API_URL}/rsvp/lookup?first_name=${firstName}&last_name=${lastName}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+
+                    if (response.ok) {
+                        guestData = await response.json();
+
+                        // Hide lookup section, show RSVP form
+                        document.getElementById('lookup-section').style.display = 'none';
+                        document.getElementById('rsvp-form').style.display = 'block';
+
+                        // Greet the guest
+                        document.getElementById('guest-greeting').textContent =
+                            `Welcome, ${guestData.first_name}! Please complete your RSVP below.`;
+
+                        // Pre-fill form if data exists
+                        if (guestData.email) {
+                            document.getElementById('email').value = guestData.email;
+                        }
+                        if (guestData.address) {
+                            document.getElementById('address').value = guestData.address;
+                        }
+                        if (guestData.is_attending !== null && guestData.is_attending !== undefined) {
+                            document.getElementById('attendance').value = guestData.is_attending.toString();
+                        }
+                    } else if (response.status === 404) {
+                        lookupMessage.textContent = 'We couldn\'t find your invitation. Please check your name and try again.';
+                        lookupMessage.style.color = '#c0392b';
+                    } else {
+                        throw new Error('Failed to find invitation');
+                    }
+                } catch (error) {
+                    lookupMessage.textContent = 'Something went wrong. Please try again.';
+                    lookupMessage.style.color = '#c0392b';
+                } finally {
+                    findInviteBtn.disabled = false;
+                    findInviteBtn.textContent = 'Find your invitation';
+                }
+            });
 
             document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -100,8 +175,8 @@
                 const submitBtn = document.querySelector('.submit-btn');
 
                 const formData = {
-                    first_name: document.getElementById('first_name').value,
-                    last_name: document.getElementById('last_name').value,
+                    first_name: guestData.first_name,
+                    last_name: guestData.last_name,
                     email: document.getElementById('email').value,
                     address: document.getElementById('address').value || null,
                     is_attending: document.getElementById('attendance').value === 'true',
@@ -111,8 +186,8 @@
                     submitBtn.disabled = true;
                     submitBtn.textContent = 'Submitting...';
 
-                    const response = await fetch(`${API_URL}/rsvp`, {
-                        method: 'POST',
+                    const response = await fetch(`${API_URL}/rsvp/${guestData.id}`, {
+                        method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -121,8 +196,7 @@
 
                     if (response.ok) {
                         formMessage.textContent = 'Thank you for your RSVP!';
-                        formMessage.style.color = '#3659a4';
-                        document.getElementById('rsvp-form').reset();
+                        formMessage.style.color = '#5a7a56';
                     } else {
                         throw new Error('Failed to submit RSVP');
                     }
@@ -131,7 +205,7 @@
                     formMessage.style.color = '#c0392b';
                 } finally {
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'Submit';
+                    submitBtn.textContent = 'Submit RSVP';
                 }
             });
         </script>
