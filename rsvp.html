@@ -101,7 +101,7 @@
         </form>
 
         <script>
-            const API_URL = 'http://api.kalynandjack.love';
+            const API_URL = 'https://api.kalynandjack.love';
             let guestData = null;
 
             document.getElementById('invite').addEventListener('click', async (e) => {
@@ -130,21 +130,19 @@
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
-                        }
+                        },
+                        mode: 'cors'
                     });
 
                     if (response.ok) {
                         guestData = await response.json();
 
-                        // Hide lookup section, show RSVP form
                         document.getElementById('lookup-section').style.display = 'none';
                         document.getElementById('rsvp-form').style.display = 'block';
 
-                        // Greet the guest
                         document.getElementById('guest-greeting').textContent =
                             `Welcome, ${guestData.first_name}! Please complete your RSVP below.`;
 
-                        // Pre-fill form if data exists
                         if (guestData.email) {
                             document.getElementById('email').value = guestData.email;
                         }
