@@ -90,6 +90,30 @@ header {
     display: flex;
     justify-content: center;
 }
+
+.venue-name {
+    color: #758fb2;
+    margin: 8px 0 4px;
+    font-family: 'Gentium Book Basic', serif;
+    letter-spacing: 2px;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    display: flex;
+    justify-content: center;
+}
+
+.address-line {
+    color: #97aac4;
+    margin: 2px 0;
+    font-family: 'Gentium Book Basic', serif;
+    letter-spacing: 2px;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    display: flex;
+    justify-content: center;
+}
 .navbar-nav.custom-header-nav .nav-item .nav-link {
     color: #758fb2 !important;
     text-decoration: none !important;
@@ -312,6 +336,16 @@ hr {
     .wedding-details, .countdown {
         font-size: 14px;
         letter-spacing: 2px;
+    }
+
+    .venue-name {
+        font-size: 1em;
+        letter-spacing: 1.5px;
+    }
+
+    .address-line {
+        font-size: 0.85em;
+        letter-spacing: 1.5px;
     }
 
     .details-lg {
