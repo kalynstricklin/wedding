@@ -24,6 +24,7 @@ export default function Rsvp() {
   const [formMessage, setFormMessage] = useState('')
   const [formMessageType, setFormMessageType] = useState<'success' | 'error' | ''>('')
   const [submitLoading, setSubmitLoading] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   const handleLookup = async () => {
     if (!firstName.trim() || !lastName.trim()) {
@@ -87,6 +88,7 @@ export default function Rsvp() {
       if (response.ok) {
         setFormMessage("Thank you for your RSVP! Don't forget to add a recipe to our cookbook on the Registry page!")
         setFormMessageType('success')
+        setSubmitted(true)
       } else {
         throw new Error('Failed to submit RSVP')
       }
@@ -146,6 +148,13 @@ export default function Rsvp() {
             )}
           </div>
         ) : (
+          submitted ? (
+            <div className="invitation-form">
+              <p className={`details ${formMessageType === 'success' ? 'success-message' : 'error-message'}`}>
+                {formMessage}
+              </p>
+            </div>
+          ) : (
           <form className="rsvp-form invitation-form" onSubmit={handleSubmit}>
             <p className="details" style={{ marginBottom: '1.5rem' }}>
               Welcome, {guestData.first_name}! Please complete your RSVP below.
@@ -198,6 +207,7 @@ export default function Rsvp() {
               </p>
             )}
           </form>
+          )
         )}
       </section>
     </main>
