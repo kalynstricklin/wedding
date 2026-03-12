@@ -85,7 +85,7 @@ export default function Rsvp() {
       })
 
       if (response.ok) {
-        setFormMessage('Thank you for your RSVP!')
+        setFormMessage("Thank you for your RSVP! Don't forget to add a recipe to our cookbook on the Registry page!")
         setFormMessageType('success')
       } else {
         throw new Error('Failed to submit RSVP')
@@ -102,7 +102,6 @@ export default function Rsvp() {
     <main className="main-content">
       <h1><span className="names">Kalyn & Jack</span></h1>
       <p className="wedding-details">April 26, 2026</p>
-
       <section className="rsvp-section">
         {!guestData ? (
           <div className="invitation-form">
