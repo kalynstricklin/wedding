@@ -1,26 +1,92 @@
+import {useCallback, useEffect, useState} from 'react'
+
+const ceremonyPhotos = [
+    // 'DSCF0309.JPEG', 'DSCF0361.JPEG', 'DSCF0577.JPEG',
+].map((f) => ({src: `/assets/ceremoney/${f}`, alt: 'Kalyn and Jack'}))
+
+const engagementPhotos = [
+    'IMG_1.jpg', 'IMG_2.jpg', 'IMG_6.jpg',
+    'IMG_10.JPG', 'IMG_11.jpg', 'IMG_12.jpg',
+].map((f) => ({src: `/assets/engagement/${f}`, alt: 'Kalyn and Jack'}))
+
 const photos = [
-  { src: '/assets/DSCF8753.JPG', alt: 'Kalyn and Jack' },
-  { src: '/assets/IMG_0756.JPG', alt: 'Kalyn and Jack' },
-  { src: '/assets/IMG_7471.JPG', alt: 'Kalyn and Jack' },
-  { src: '/assets/DSCF6375.jpg', alt: 'Kalyn and Jack' },
-  { src: '/assets/000198080003.JPG', alt: 'Kalyn and Jack' },
-]
+   'img1.JPG', 'IMG_0531.jpg', 'IMG_0756.JPG', 'IMG_7471.JPG', 'IMG_8558.JPG'
+].map((f) => ({src: `/assets/${f}`, alt: 'Kalyn and Jack'}))
+
+const allPhotos = [...ceremonyPhotos, ...engagementPhotos, ...photos]
 
 export default function Photos() {
-  return (
-    <main className="main-content">
-      <h1><span className="names">Kalyn & Jack</span></h1>
-      <p className="wedding-details">April 26, 2026</p>
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
-      <section className="photos-section">
-        <div className="photo-gallery">
-          {photos.map((photo, i) => (
-            <div className="photo-item" key={i}>
-              <img src={photo.src} alt={photo.alt} />
-            </div>
-          ))}
-        </div>
-      </section>
-    </main>
-  )
+    const close = useCallback(() => setLightboxIndex(null), [])
+
+    const prev = useCallback(() => setLightboxIndex((i) => (i !== null ? (i - 1 + allPhotos.length) % allPhotos.length : null)), [])
+
+    const next = useCallback(() => setLightboxIndex((i) => (i !== null ? (i + 1) % allPhotos.length : null)), [])
+
+    useEffect(() => {
+        if (lightboxIndex === null) return
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') close()
+            if (e.key === 'ArrowLeft') prev()
+            if (e.key === 'ArrowRight') next()
+        }
+        document.body.style.overflow = 'hidden'
+        window.addEventListener('keydown', onKey)
+        return () => {
+            document.body.style.overflow = ''
+            window.removeEventListener('keydown', onKey)
+        }
+    }, [lightboxIndex, close, prev, next])
+
+    return (
+        <main className="main-content">
+            {/*<h1><span className="names">Kalyn & Jack</span></h1>*/}
+            {/*<p className="wedding-details">April 26, 2026</p>*/}
+
+            <section className="photos-section">
+                {/*<h2 className="script">ceremony</h2>*/}
+                <div className="photo-gallery">
+                    {allPhotos.map((photo, i) => (
+                        <div className="photo-item" key={i} onClick={() => setLightboxIndex(i)}>
+                            <img src={photo.src} alt={photo.alt}/>
+                        </div>
+                    ))}
+                </div>
+
+            </section>
+
+            {lightboxIndex !== null && (
+                <div className="lightbox-overlay" onClick={close}>
+                    <button className="lightbox-close" onClick={close} aria-label="Close">&times;</button>
+                    <button
+                        className="lightbox-arrow lightbox-prev"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            prev()
+                        }}
+                        aria-label="Previous"
+                    >
+                        &#8249;
+                    </button>
+                    <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+                        <img src={allPhotos[lightboxIndex].src} alt={allPhotos[lightboxIndex].alt}/>
+                    </div>
+                    <button
+                        className="lightbox-arrow lightbox-next"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            next()
+                        }}
+                        aria-label="Next"
+                    >
+                        &#8250;
+                    </button>
+                    <div className="lightbox-counter">
+                        {lightboxIndex + 1} / {allPhotos.length}
+                    </div>
+                </div>
+            )}
+        </main>
+    )
 }
