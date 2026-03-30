@@ -1,11 +1,11 @@
 const faqs = [
     {
         question: 'What should I RSVP by?',
-        answer: 'Please RSVP by April 8th, so that we can save you a seat! If you have any questions you can email us at kalynandjack@aol.com',
+        answer: 'Please RSVP by April 8th so we can save you a seat at the reception! If you have any questions you can email us at kalynandjack@aol.com',
     },
     {
         question: 'What should I wear?',
-        answer: "Dressy Casual. Wear something you'd be comfortable in for a spring evening in the gardens",
+        answer: "Dressy Casual. Wear something you'd be comfortable in for a spring evening in the gardens.",
     },
     {
         question: 'Can I bring a date or plus one?',
@@ -13,7 +13,7 @@ const faqs = [
     },
     {
         question: 'Is the venue indoors or outdoors?',
-        answer: "The reception will be at the Grisham Pavilion in Huntsville Botanical Gardens, which is a covered outdoor space. We recommend dressing for a spring evening\u2014it may be warm, so light layers are a good idea.",
+        answer: "The reception is at the Grisham Pavilion in Huntsville Botanical Gardens, which is a covered outdoor space. We recommend dressing for a spring evening\u2014it may be warm, so light layers are a good idea.",
     },
     {
         question: 'Is there parking at the venue?',
@@ -25,7 +25,7 @@ const faqs = [
     },
     {
         question: 'Will there be food and drinks?',
-        answer: "Yes! We'll have food and drinks available throughout the reception.",
+        answer: "Yes! There will be food and drinks available throughout the reception.",
     },
 ]
 

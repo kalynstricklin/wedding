@@ -1,19 +1,11 @@
 import {useCallback, useEffect, useState} from 'react'
 
 const ceremonyPhotos = [
-    // 'DSCF0309.JPEG', 'DSCF0361.JPEG', 'DSCF0577.JPEG',
+    'DSCF0259.JPEG', 'DSCF0309.JPEG', 'DSCF0146.JPEG',
+    'DSCF0574.JPEG', 'IMG_6094.JPG', 'IMG_6106.JPG'
 ].map((f) => ({src: `/assets/ceremoney/${f}`, alt: 'Kalyn and Jack'}))
 
-const engagementPhotos = [
-    'IMG_1.jpg', 'IMG_2.jpg', 'IMG_6.jpg',
-    'IMG_10.JPG', 'IMG_11.jpg', 'IMG_12.jpg',
-].map((f) => ({src: `/assets/engagement/${f}`, alt: 'Kalyn and Jack'}))
-
-const photos = [
-   'img1.JPG', 'IMG_0531.jpg', 'IMG_0756.JPG', 'IMG_7471.JPG', 'IMG_8558.JPG'
-].map((f) => ({src: `/assets/${f}`, alt: 'Kalyn and Jack'}))
-
-const allPhotos = [...ceremonyPhotos, ...engagementPhotos, ...photos]
+const allPhotos = [...ceremonyPhotos]
 
 export default function Photos() {
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)

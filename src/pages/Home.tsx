@@ -12,14 +12,14 @@ export default function Home() {
             </div>
 
             <section className="wedding-day">
-                <p className="script">wedding details</p>
-                <p className="wedding-details">Monday, March 16, 2026</p>
+                <p className="script">we got married!</p>
+                <p className="wedding-details">March 16, 2026</p>
                 <div className="venue-name">San Francisco City Hall</div>
                 <div className="address-line">San Francisco, CA</div>
             </section>
 
             <section className="wedding-day">
-                <p className="script">reception details</p>
+                <p className="script">join us for the reception</p>
                 <p className="wedding-details">Sunday, April 26, 2026, 4 - 7 PM</p>
                 <div className="venue-name">Grisham Pavilion</div>
                 <div className="venue-name-sub">Huntsville Botanical Gardens</div>

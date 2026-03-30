@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom'
 
 const navItems = [
   { path: '/', label: 'Home' },
-  { path: '/photos', label: 'Photos' },
+  // { path: '/photos', label: 'Photos' },
   { path: '/registry', label: 'Registry' },
   { path: '/rsvp', label: 'RSVP' },
-  { path: '/faq', label: 'FAQ' },
+  // { path: '/faq', label: 'FAQ' },
 ]
 
 function Navbar() {
