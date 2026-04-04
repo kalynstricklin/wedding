@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+
 const faqs = [
     {
         question: 'What should I RSVP by?',
@@ -30,14 +33,58 @@ const faqs = [
 ]
 
 export default function Faq() {
+    const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+    const toggle = (i: number) => {
+        setOpenIndex(openIndex === i ? null : i)
+    }
+
     return (
         <main className="main-content">
+            <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                <span className="names">all the info</span>
+            </motion.h1>
+
             <section className="faq-section">
                 {faqs.map((faq, i) => (
-                    <div className="faq-item" key={i}>
-                        <p className="faq-question">{faq.question}</p>
-                        <p className="faq-answer">{faq.answer}</p>
-                    </div>
+                    <motion.div
+                        className="faq-item"
+                        key={i}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.08, duration: 0.4 }}
+                    >
+                        <div
+                            className="faq-question"
+                            onClick={() => toggle(i)}
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggle(i) }}
+                        >
+                            <span>{faq.question}</span>
+                            <span className={`faq-chevron ${openIndex === i ? 'open' : ''}`}>
+                                &#9662;
+                            </span>
+                        </div>
+                        <AnimatePresence>
+                            {openIndex === i && (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                    style={{ overflow: 'hidden' }}
+                                >
+                                    <p className="faq-answer">{faq.answer}</p>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.div>
                 ))}
             </section>
         </main>

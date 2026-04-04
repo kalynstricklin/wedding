@@ -1,4 +1,5 @@
-import {FormEvent, useState} from 'react'
+import { FormEvent, useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const API_URL = 'https://api.kalynandjack.love'
 
@@ -9,6 +10,54 @@ interface GuestData {
     email: string | null
     address: string | null
     is_attending: boolean | null
+}
+
+const CONFETTI_COLORS = ['#5a7a56', '#758fb2', '#c5d4c0', '#97aac4', '#f7f5f0', '#d4a574']
+
+function Confetti() {
+    const [pieces] = useState(() =>
+        Array.from({ length: 40 }, (_, i) => ({
+            id: i,
+            left: Math.random() * 100,
+            delay: Math.random() * 2,
+            duration: 2 + Math.random() * 2,
+            color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+            size: 6 + Math.random() * 8,
+        }))
+    )
+
+    const [visible, setVisible] = useState(true)
+
+    useEffect(() => {
+        const timer = setTimeout(() => setVisible(false), 4500)
+        return () => clearTimeout(timer)
+    }, [])
+
+    if (!visible) return null
+
+    return (
+        <div className="confetti-container">
+            {pieces.map((p) => (
+                <div
+                    key={p.id}
+                    className="confetti-piece"
+                    style={{
+                        left: `${p.left}%`,
+                        animationDelay: `${p.delay}s`,
+                        animationDuration: `${p.duration}s`,
+                        backgroundColor: p.color,
+                        width: p.size,
+                        height: p.size,
+                    }}
+                />
+            ))}
+        </div>
+    )
+}
+
+const fadeUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
 }
 
 export default function Rsvp() {
@@ -40,7 +89,7 @@ export default function Rsvp() {
                 `${API_URL}/rsvp/lookup?first_name=${encodeURIComponent(firstName.trim())}&last_name=${encodeURIComponent(lastName.trim())}`,
                 {
                     method: 'GET',
-                    headers: {'Content-Type': 'application/json'},
+                    headers: { 'Content-Type': 'application/json' },
                     mode: 'cors',
                 }
             )
@@ -81,7 +130,7 @@ export default function Rsvp() {
             setSubmitLoading(true)
             const response = await fetch(`${API_URL}/rsvp/${guestData.id}`, {
                 method: 'PUT',
-                headers: {'Content-Type': 'application/json'},
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             })
 
@@ -102,62 +151,106 @@ export default function Rsvp() {
 
     return (
         <main className="main-content">
-            <h1><span className="names">Kalyn & Jack</span></h1>
-            <p className="wedding-details">April 26, 2026</p>
+            <motion.h1
+                initial="hidden"
+                animate="visible"
+                variants={fadeUp}
+                transition={{ duration: 0.5 }}
+            >
+                <span className="names">rsvp</span>
+            </motion.h1>
+            <motion.p
+                className="wedding-details"
+                initial="hidden"
+                animate="visible"
+                variants={fadeUp}
+                transition={{ delay: 0.1, duration: 0.5 }}
+            >
+                April 26, 2026
+            </motion.p>
+
             <section className="rsvp-section">
-                {!guestData ? (
-                    <div className="invitation-form">
-                        <div className="invitation-group">
-                            <label htmlFor="first_name" className="details">First Name</label>
-                            <input
-                                type="text"
-                                id="first_name"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
-                                required
-                            />
-                        </div>
+                <AnimatePresence mode="wait">
+                    {!guestData ? (
+                        <motion.div
+                            key="lookup"
+                            className="invitation-form"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.4 }}
+                        >
+                            <div className="invitation-group">
+                                <label htmlFor="first_name" className="details">First Name</label>
+                                <input
+                                    type="text"
+                                    id="first_name"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    required
+                                />
+                            </div>
 
-                        <div className="invitation-group">
-                            <label htmlFor="last_name" className="details">Last Name</label>
-                            <input
-                                type="text"
-                                id="last_name"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                                required
-                            />
-                        </div>
+                            <div className="invitation-group">
+                                <label htmlFor="last_name" className="details">Last Name</label>
+                                <input
+                                    type="text"
+                                    id="last_name"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    required
+                                />
+                            </div>
 
-                        <p className="details" style={{margin: '1.5rem 0'}}>
-                            Due to limited space, attendance is reserved for those on our guest list. Please enter your
-                            name to find your invitation.
-                        </p>
+                            <p className="details" style={{ margin: '1.5rem 0' }}>
+                                Due to limited space, attendance is reserved for those on our guest list. Please enter your
+                                name to find your invitation.
+                            </p>
 
-                        <div className="rsvp-link">
-                            <button
-                                className="invite-btn"
-                                onClick={handleLookup}
-                                disabled={lookupLoading}
-                            >
-                                {lookupLoading ? 'Finding Invitation...' : 'Find your invitation'}
-                            </button>
-                        </div>
+                            <div className="rsvp-link">
+                                <button
+                                    className="invite-btn"
+                                    onClick={handleLookup}
+                                    disabled={lookupLoading}
+                                >
+                                    {lookupLoading ? 'Finding Invitation...' : 'Find your invitation'}
+                                </button>
+                            </div>
 
-                        {lookupMessage && (
-                            <p className="details error-message">{lookupMessage}</p>
-                        )}
-                    </div>
-                ) : (
-                    submitted ? (
-                        <div className="invitation-form">
+                            {lookupMessage && (
+                                <motion.p
+                                    className="details error-message"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                >
+                                    {lookupMessage}
+                                </motion.p>
+                            )}
+                        </motion.div>
+                    ) : submitted ? (
+                        <motion.div
+                            key="success"
+                            className="invitation-form"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            <Confetti />
                             <p className={`details ${formMessageType === 'success' ? 'success-message' : 'error-message'}`}>
                                 {formMessage}
                             </p>
-                        </div>
+                        </motion.div>
                     ) : (
-                        <form className="rsvp-form invitation-form" onSubmit={handleSubmit}>
-                            <p className="details" style={{marginBottom: '1.5rem'}}>
+                        <motion.form
+                            key="form"
+                            className="rsvp-form invitation-form"
+                            onSubmit={handleSubmit}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.4 }}
+                        >
+                            <p className="details" style={{ marginBottom: '1.5rem' }}>
                                 Welcome, {guestData.first_name}! Please complete your RSVP below.
                             </p>
 
@@ -203,13 +296,17 @@ export default function Rsvp() {
                             </div>
 
                             {formMessage && (
-                                <p className={`details ${formMessageType === 'success' ? 'success-message' : 'error-message'}`}>
+                                <motion.p
+                                    className={`details ${formMessageType === 'success' ? 'success-message' : 'error-message'}`}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                >
                                     {formMessage}
-                                </p>
+                                </motion.p>
                             )}
-                        </form>
-                    )
-                )}
+                        </motion.form>
+                    )}
+                </AnimatePresence>
             </section>
         </main>
     )

@@ -32,12 +32,49 @@ body {
   min-height: 100vh;
 }
 
-/* Navigation */
+/* ========================= */
+/* Keyframe Animations       */
+/* ========================= */
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes gentlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes confettiDrop {
+  0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* ========================= */
+/* Navigation                */
+/* ========================= */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: linear-gradient(135deg, #f7f5f0 0%, #faf8f3 50%, #f5f3ee 100%);
+  background: linear-gradient(135deg, rgba(247,245,240,0.95) 0%, rgba(250,248,243,0.95) 50%, rgba(245,243,238,0.95) 100%);
+  backdrop-filter: blur(10px);
   padding: 0.75rem 1rem;
   margin-bottom: 1.5rem;
 }
@@ -60,9 +97,21 @@ body {
   position: relative;
 }
 
-.nav-desktop li a:hover,
-.nav-desktop li a.active {
-  border-bottom: 2px solid #758fb2;
+.nav-desktop li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #5a7a56;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-desktop li a:hover::after,
+.nav-desktop li a.active::after {
+  width: 100%;
+  left: 0;
 }
 
 /* Mobile nav */
@@ -83,6 +132,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  width: 38px;
+  height: 38px;
+  justify-content: center;
+  align-items: center;
 }
 
 .hamburger span {
@@ -90,14 +143,27 @@ body {
   width: 22px;
   height: 2px;
   background-color: #758fb2;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .page-title {
-  font-family: 'Gentium Book Basic', serif;
-  font-weight: 500;
-  color: #758fb2;
-  font-size: 35px;
+  font-family: 'Beth Ellen', cursive;
+  font-weight: 400;
+  color: #5a7a56;
+  font-size: 28px;
   margin: 0;
 }
 
@@ -107,6 +173,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  overflow: hidden;
 }
 
 .nav-mobile-menu li a {
@@ -118,13 +185,21 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.nav-mobile-menu li a:hover {
+  color: #5a7a56;
 }
 
 .nav-mobile-menu li a.active {
-  border-bottom: 2px solid #758fb2;
+  color: #5a7a56;
+  border-bottom: 2px solid #5a7a56;
 }
 
-/* Main content */
+/* ========================= */
+/* Main content              */
+/* ========================= */
 .main-content {
   flex: 1;
   max-width: 100%;
@@ -219,7 +294,73 @@ body {
   object-fit: contain;
 }
 
-/* Buttons */
+/* Ken Burns effect for hero photo */
+.wedding-img.ken-burns img {
+  animation: kenBurns 20s ease-in-out infinite;
+  border-radius: 12px;
+}
+
+/* ========================= */
+/* Decorative Divider        */
+/* ========================= */
+.flourish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 2rem auto;
+  max-width: 250px;
+  color: #c5d4c0;
+}
+
+.flourish::before,
+.flourish::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #c5d4c0, transparent);
+}
+
+.flourish-leaf {
+  font-size: 14px;
+  color: #5a7a56;
+  opacity: 0.6;
+}
+
+/* Countdown Timer */
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #5a7a56;
+  line-height: 1;
+}
+
+.countdown-label {
+  font-family: 'Gentium Book Basic', serif;
+  font-size: 0.7rem;
+  color: #97aac4;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ========================= */
+/* Buttons                   */
+/* ========================= */
 .rsvp-link {
   display: flex;
   justify-content: center;
@@ -234,17 +375,20 @@ body {
   padding: 14px 32px;
   font-size: 16px;
   font-family: 'Gentium Book Basic', serif;
-  border-radius: 4px;
+  border-radius: 24px;
   min-height: 48px;
   min-width: 200px;
   text-align: center;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(117, 143, 178, 0.2);
 }
 
 .registry-btn:hover {
-  background-color: #5a6d7a;
+  background-color: #5a7a56;
   color: #fff;
   text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(90, 122, 86, 0.3);
 }
 
 .registry-img-link {
@@ -257,6 +401,11 @@ body {
   transform: scale(1.03);
 }
 
+/* Floating animation for registry CTA */
+.registry-img-link.floating {
+  animation: float 4s ease-in-out infinite;
+}
+
 .submit-btn, .invite-btn {
   background-color: #758fb2;
   color: #fff;
@@ -265,28 +414,35 @@ body {
   font-size: 16px;
   font-family: 'Gentium Book Basic', serif;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 24px;
   min-height: 48px;
   width: 100%;
   max-width: 200px;
   margin-top: 1rem;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(117, 143, 178, 0.2);
 }
 
 .submit-btn:hover, .invite-btn:hover {
-  background-color: #5a6d7a;
+  background-color: #5a7a56;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(90, 122, 86, 0.3);
 }
 
 .submit-btn:disabled, .invite-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-/* Dividers */
+/* ========================= */
+/* Dividers                  */
+/* ========================= */
 hr {
   width: 100%;
   max-width: 200px;
-  background-color: #c5d4c0;
+  background: linear-gradient(to right, transparent, #c5d4c0, transparent);
   height: 1px;
   border: none;
   margin: 20px auto;
@@ -298,7 +454,9 @@ hr {
   color: #758fb2;
 }
 
-/* Registry */
+/* ========================= */
+/* Registry                  */
+/* ========================= */
 .registry-section {
   text-align: center;
   width: 100%;
@@ -316,7 +474,9 @@ hr {
   margin-top: 0;
 }
 
-/* Form styles */
+/* ========================= */
+/* Form styles               */
+/* ========================= */
 .invitation-form {
   max-width: 500px;
   margin: 0 auto;
@@ -343,10 +503,11 @@ hr {
   padding: 12px 16px;
   font-size: 16px;
   font-family: 'Gentium Book Basic', serif;
-  border: 1px solid #758fb2;
-  border-radius: 4px;
+  border: 1px solid #c5d4c0;
+  border-radius: 12px;
   color: #758fb2;
   background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .invitation-form input:focus,
@@ -354,43 +515,46 @@ hr {
 .rsvp-form input:focus,
 .rsvp-form select:focus {
   outline: none;
-  border-color: #758fb2;
-  box-shadow: 0 0 0 2px rgba(54, 89, 164, 0.2);
+  border-color: #5a7a56;
+  box-shadow: 0 0 0 3px rgba(90, 122, 86, 0.15);
 }
 
-/* Photo gallery */
+/* ========================= */
+/* Photo gallery             */
+/* ========================= */
 .photo-gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+  columns: 2;
+  column-gap: 0.75rem;
   padding: 0.5rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .photo-item {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 12px;
   box-shadow: 0 2px 12px rgba(90, 122, 86, 0.12);
   cursor: pointer;
-  aspect-ratio: 1 / 1;
 }
 
 .photo-item img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   display: block;
-  transition: transform 0.3s ease;
-  border: 4px solid #5a7a56;
-  border-radius: 4px;
+  transition: transform 0.5s ease;
+  border-radius: 12px;
 }
 
 .photo-item:hover img {
   transform: scale(1.05);
 }
 
-/* Lightbox */
+/* ========================= */
+/* Lightbox                  */
+/* ========================= */
 .lightbox-overlay {
   position: fixed;
   inset: 0;
@@ -413,7 +577,7 @@ hr {
   max-width: 100%;
   max-height: 85vh;
   object-fit: contain;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .lightbox-close {
@@ -428,6 +592,7 @@ hr {
   z-index: 1001;
   line-height: 1;
   padding: 0.5rem;
+  transition: color 0.2s ease;
 }
 
 .lightbox-close:hover {
@@ -447,6 +612,7 @@ hr {
   padding: 1rem;
   line-height: 1;
   user-select: none;
+  transition: color 0.2s ease;
 }
 
 .lightbox-arrow:hover {
@@ -472,7 +638,9 @@ hr {
   letter-spacing: 2px;
 }
 
-/* FAQ */
+/* ========================= */
+/* FAQ                       */
+/* ========================= */
 .faq-section {
   max-width: 600px;
   margin: 0 auto;
@@ -481,7 +649,15 @@ hr {
 }
 
 .faq-item {
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+  box-shadow: 0 2px 12px rgba(90, 122, 86, 0.1);
 }
 
 .faq-question {
@@ -489,7 +665,28 @@ hr {
   font-family: 'Gentium Book Basic', serif;
   font-size: 1em;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.faq-question:hover {
+  color: #4a6a46;
+}
+
+.faq-chevron {
+  font-size: 0.8em;
+  transition: transform 0.3s ease;
+  color: #97aac4;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.faq-chevron.open {
+  transform: rotate(180deg);
 }
 
 .faq-answer {
@@ -497,26 +694,67 @@ hr {
   font-family: 'Gentium Book Basic', serif;
   font-size: 0.95em;
   line-height: 1.6;
+  padding: 0 1.25rem 1rem;
 }
 
-/* Footer */
+/* ========================= */
+/* Confetti                  */
+/* ========================= */
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: confettiDrop 3s ease-in forwards;
+}
+
+/* ========================= */
+/* Footer                    */
+/* ========================= */
 .footer {
   font-family: 'Gentium Book Basic', serif;
   margin-top: auto;
   color: #758fb2;
   display: flex;
   justify-content: center;
-  padding-top: 2rem;
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+}
+
+.footer-inner {
+  text-align: center;
 }
 
 .footer-initials {
   text-align: center;
   display: block;
   width: 100%;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  font-family: 'Beth Ellen', cursive;
+  color: #5a7a56;
+  font-weight: normal;
 }
 
-/* Message styles */
+.footer-date {
+  font-family: 'Gentium Book Basic', serif;
+  color: #97aac4;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* ========================= */
+/* Message styles            */
+/* ========================= */
 .error-message {
   color: #c0392b;
   margin-top: 1rem;
@@ -527,9 +765,16 @@ hr {
   margin-top: 1rem;
 }
 
-/* ==================== */
-/* Tablet: 576px+       */
-/* ==================== */
+/* ========================= */
+/* Page transition wrapper   */
+/* ========================= */
+.page-transition {
+  width: 100%;
+}
+
+/* ========================= */
+/* Tablet: 576px+            */
+/* ========================= */
 @media (min-width: 576px) {
   .names {
     font-size: 3rem;
@@ -563,13 +808,9 @@ hr {
   }
 
   .photo-gallery {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    columns: 2;
+    column-gap: 1.5rem;
     padding: 1rem;
-  }
-
-  .photo-item {
-    aspect-ratio: 1 / 1;
   }
 
   .faq-section {
@@ -583,11 +824,15 @@ hr {
   .faq-answer {
     font-size: 1em;
   }
+
+  .countdown-number {
+    font-size: 2.5rem;
+  }
 }
 
-/* ==================== */
-/* Desktop: 769px+      */
-/* ==================== */
+/* ========================= */
+/* Desktop: 769px+           */
+/* ========================= */
 @media (min-width: 769px) {
   body {
     padding: 2rem;
@@ -616,8 +861,12 @@ hr {
   }
 
   .photo-gallery {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    columns: 3;
+    column-gap: 1.5rem;
+  }
+
+  .countdown-number {
+    font-size: 3rem;
   }
 }
 
@@ -628,10 +877,18 @@ hr {
   }
 
   .page-title {
-    font-size: 28px;
+    font-size: 24px;
   }
 
   .footer h1 {
     font-size: 1.25rem;
+  }
+
+  .countdown-timer {
+    gap: 1rem;
+  }
+
+  .countdown-number {
+    font-size: 1.75rem;
   }
 }
