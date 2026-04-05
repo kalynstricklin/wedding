@@ -20,7 +20,7 @@ const faqs = [
     },
     {
         question: 'Is there parking at the venue?',
-        answer: 'Yes! Free parking is available at the Huntsville Botanical Gardens. Follow signs to the Grisham Pavilion parking area.',
+        answer: 'Yes! Free parking is available at the Huntsville Botanical Gardens in the Dogwood Parking Lot. Follow signs to the Grisham Pavilion and park there!',
     },
     {
         question: 'What time should I arrive?',
@@ -28,7 +28,7 @@ const faqs = [
     },
     {
         question: 'Will there be food and drinks?',
-        answer: "Yes! There will be food and drinks available throughout the reception.",
+        answer: "Yes! There will be food and drinks available throughout the reception. If you have any food allergies/sensitivities please let contact us directly.",
     },
 ]
 
