@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const faqs = [
     {
-        question: 'What should I RSVP by?',
+        question: 'When should I RSVP by?',
         answer: 'Please RSVP by April 4th so we can save you a seat at the reception! If you have any questions you can email us at kalynandjack@aol.com',
     },
     {
