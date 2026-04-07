@@ -7,6 +7,7 @@ import Photos from './pages/Photos'
 import Registry from './pages/Registry'
 import Rsvp from './pages/Rsvp'
 import Faq from './pages/Faq'
+import SparkleTrail from './components/SparkleTrail'
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
@@ -34,6 +35,7 @@ function App() {
 
   return (
     <>
+      <SparkleTrail />
       <Navbar />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
